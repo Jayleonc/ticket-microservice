@@ -1,0 +1,15 @@
+﻿server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Jayleonc/ticket-config
+          username: Jayleonc
+          password: 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
+          search-paths: config
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="consumer-movie" />
+        <module name="config-server" />
+      </profile>
+      <profile name="Annotation profile for ticket-microservice" enabled="true">
+        <sourceOutputDir name="../../../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-server" />
+        <module name="config-client" />
+        <module name="provider-user" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config-client" target="1.8" />
+      <module name="config-server" target="1.8" />
+      <module name="consumer-movie" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="provider-user" target="1.8" />
+      <module name="ticket-microservice" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-client" options="-parameters" />
+      <module name="config-server" options="" />
+      <module name="consumer-movie" options="" />
+      <module name="eureka-server" options="" />
+      <module name="provider-user" options="" />
+      <module name="ticket-microservice" options="-parameters" />
+    </option>
+  </component>
+</project>

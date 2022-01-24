@@ -1,0 +1,27 @@
+server:
+  port: 8761
+
+eureka:
+  client:
+    # 将自身注册到Eureka服务发现上，使用 Eureka 集群时设置为 true
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    # 设置当前实例的主机名称。
+    hostname: ${EUREKA_ZONE_HOST:localhost}
+    appname: eureka-8761
+  server:
+    # 用于设置是否关闭注册中心的保护机制。什么是保护机制呢？
+    # Eureka Server会定时统计15分钟之内心跳成功的Provider实例的比例
+    # 如果低于85%就会触发保护机制，处于保护状态的Eureka Server不剔除失效的服务提供者。
+    # enable-self-preservation的默认值为true表示开启自我保护机制。
+    # 如果15分钟之内心跳成功的Provider实例的比例高于85%，那么Eureka Server仍然会处于正常状态。
+    enable-self-preservation: true
+    # 配置Eureka Server清理无效节点的时间间隔，默认为60 000毫秒（60秒）。
+    # 但是，如果Eureka Server处于保护状态，此配置就无效。
+    eviction-interval-timer-in-ms: 1000
+
+
+

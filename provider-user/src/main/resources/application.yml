@@ -1,0 +1,52 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /provider-user
+
+spring:
+  application:
+    name: provider-user-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ticket?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: jayleonc
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.ticket.provideruser.domain
+
+management:
+  endpoint:
+    health:
+      show-components: always
+      enabled: true
+    info:
+      enabled: true
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /actuator
+    enabled-by-default: true
+
+eureka:
+  # 作为服务提供者（实例角色）的相关配置
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: ${spring.cloud.client.ip-address}
+    prefer-ip-address: true
+    health-check-url-path: /${server.servlet.context-path}${management.endpoints.web.base-path}/health
+    status-page-url-path: /${server.servlet.context-path}${management.endpoints.web.base-path}/info
+  # 作为注册中心客户端（Eureka Client 角色）的相关配置
+  client:
+    # 注册到 eureka 服务器
+    register-with-eureka: true
+    # 是否去注册中心获取其他服务
+    fetch-registry: true
+    # Eureka 服务地址
+    service-url:
+      defaultZone: http://${EUREKA_ZONE_HOST:localhost}:8761/eureka
